@@ -4,7 +4,7 @@ import { Link, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import Schools from './Schools';
 import { getUsers } from '../store';
-import Logo from './Logo';
+import { Logo } from '.';
 
 class Menu extends React.Component {
   constructor() {

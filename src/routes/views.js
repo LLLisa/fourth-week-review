@@ -1,7 +1,5 @@
 import React from 'react';
-import Schools from '../components/Schools';
-import Users from '../components/Users';
-import UserDetail from '../components/UserDetail';
+import { Schools, Users, UserDetail } from '../components';
 
 const views = [
   { path: 'users', element: <Users /> },

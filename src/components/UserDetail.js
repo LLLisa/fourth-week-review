@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const UserDetail = () => {
-  return <hr />;
+const UserDetail = ({ users }) => {
+  return <>UserDetail Component</>;
 };
 
-export default UserDetail;
+export default connect((state) => state)(UserDetail);

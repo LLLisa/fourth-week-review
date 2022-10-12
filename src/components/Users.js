@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import User from './User';
 
 //destructuring?
@@ -11,7 +12,8 @@ const Users = (props) => {
         {props.userList.map((user) => {
           return (
             <li key={user.id}>
-              <User userInfo={user} />
+              <Link to={`user/${user.id}`}>{user.name}</Link>
+              {/* <User userInfo={user} /> */}
             </li>
           );
         })}
