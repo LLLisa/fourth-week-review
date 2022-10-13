@@ -12,7 +12,7 @@ const Users = (props) => {
         {props.userList.map((user) => {
           return (
             <li key={user.id}>
-              <Link to={`user/${user.id}`}>{user.name}</Link>
+              <Link to={`${user.id}`}>{user.name}</Link>
               {/* <User userInfo={user} /> */}
             </li>
           );

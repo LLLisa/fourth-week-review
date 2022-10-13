@@ -16,10 +16,14 @@ app.use('/api/schools', require('./schools'));
 app.use(express.static(path.join(__dirname, '../../public')));
 app.use('/dist', express.static(path.join(__dirname, '../../dist')));
 
-//serve index.html--------------------------------------
-// app.get('/', (req, res, next) => {
-//   res.sendFile(path.join(__dirname, ''));
-// });
+//catch all stray routes--------------------------------------
+app.use('*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../../public/index.html'), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 //error handler---------------------------------
 app.use((err, req, res, next) => {

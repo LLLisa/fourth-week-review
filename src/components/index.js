@@ -1,8 +1,8 @@
-import Logo from './Logo';
+import Homeboi from './Homeboi';
 import Menu from './Menu';
 // import User from "./User";
 import Users from './Users';
 import UserDetail from './UserDetail';
 import Schools from './Schools';
 
-export { Logo, Menu, Users, UserDetail, Schools };
+export { Homeboi, Menu, Users, UserDetail, Schools };

@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Schools from './Schools';
-import { getUsers } from '../store';
-import { Logo } from '.';
+import { getUsers, getSchools } from '../store';
+import { Homeboi } from '.';
 
 class Menu extends React.Component {
   constructor() {
@@ -13,21 +13,22 @@ class Menu extends React.Component {
       //set the default state to the data type it will be
       //THIS WILL SAVE YOUR LIFE as your projects get bigger
       selectedList: '',
-      userList: [],
-      schoolList: [],
+      // userList: [],
+      // schoolList: [],
     };
     this.selectList = this.selectList.bind(this);
+    this.resetListDisplay = this.resetListDisplay.bind(this);
     // this.getUsers = this.getUsers.bind(this);
-    this.getSchools = this.getSchools.bind(this);
+    // this.getSchools = this.getSchools.bind(this);
   }
 
   //this runs the first time a component renders
   //set pieces of state to their initial values
   componentDidMount() {
-    this.setState({ selectedList: 'Users' });
+    this.resetListDisplay();
     //getUsers is now on props instead of 'this'
     this.props.getUsers();
-    this.getSchools();
+    this.props.getSchools();
   }
 
   //these fumctions are now in the store!
@@ -36,31 +37,38 @@ class Menu extends React.Component {
   //   this.setState({ userList: users.data });
   // }
 
-  async getSchools() {
-    const schools = await axios.get('/api/schools');
-    this.setState({ schoolList: schools.data });
-  }
+  // async getSchools() {
+  //   const schools = await axios.get('/api/schools');
+  //   this.setState({ schoolList: schools.data });
+  // }
 
   //this is an event handler that handles the 'onClick' event below
-  selectList(ev) {
+  selectList() {
     this.setState({
       selectedList: window.location.toString().split('/').at(-1),
     });
   }
 
+  resetListDisplay() {
+    this.setState({ selectedList: 'Make a Selection' });
+  }
+
   render() {
-    //destructuring selectedList because it is being used twice
-    // console.log(this.props);
-    const { selectedList, schoolList } = this.state;
     return (
       <>
-        <Logo />
-        <h1 id='header'>{selectedList}</h1>
-        <nav id='nav'>
-          <Link to='users'>Users</Link>
-          <Link to='schools'>Schools</Link>
-        </nav>
-        <Outlet />
+        <figure onClick={this.resetListDisplay}>
+          <Homeboi />
+        </figure>
+        <header>
+          <h1 id='selected-list'>{this.state.selectedList}</h1>
+          <nav id='nav' onClick={this.selectList}>
+            <Link to='users'>Users</Link>
+            <Link to='schools'>Schools</Link>
+          </nav>
+        </header>
+        <section>
+          <Outlet />
+        </section>
       </>
     );
   }
@@ -73,6 +81,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     getUsers: () => dispatch(getUsers()),
+    getSchools: () => dispatch(getSchools()),
   };
 };
 
