@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Outlet } from 'react-router-dom';
+// import { Link, Outlet } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import axios from 'axios';
-import Schools from './Schools';
+// import Schools from './Schools';
 import { getUsers } from '../store';
-import { Logo } from '.';
+import { Logo, Users, Schools } from '.';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 class Menu extends React.Component {
   constructor() {
@@ -43,24 +45,43 @@ class Menu extends React.Component {
 
   //this is an event handler that handles the 'onClick' event below
   selectList(ev) {
-    this.setState({
-      selectedList: window.location.toString().split('/').at(-1),
-    });
+    this.setState({ selectedList: ev.target.text });
   }
 
   render() {
     //destructuring selectedList because it is being used twice
     // console.log(this.props);
-    const { selectedList, schoolList } = this.state;
+    const { selectedList, selectList } = this.state;
     return (
+      // <>
+      //   <Logo />
+      //   <h1 id='header'>{selectedList}</h1>
+      //   <nav id='nav'>
+      //     <span onClick={(ev) => this.selectList(ev)}>
+      //       <Link to='users'>Users</Link>
+      //     </span>
+      //     <span value='Schools' onClick={(ev) => this.selectList(ev)}>
+      //       <Link to='schools'>Schools</Link>
+      //     </span>
+      //   </nav>
+      //   <Outlet />
+      // </>
       <>
         <Logo />
         <h1 id='header'>{selectedList}</h1>
         <nav id='nav'>
-          <Link to='users'>Users</Link>
-          <Link to='schools'>Schools</Link>
+          <span onClick={(ev) => this.selectList(ev)}>
+            <Link to='users'>Users</Link>
+          </span>
+          <span value='Schools' onClick={(ev) => this.selectList(ev)}>
+            <Link to='schools'>Schools</Link>
+          </span>
         </nav>
-        <Outlet />
+        <Switch>
+          <Route path='/users' component={Users} />
+          <Route path='/schools' component={Schools} />
+          <Redirect to='/users' />
+        </Switch>
       </>
     );
   }

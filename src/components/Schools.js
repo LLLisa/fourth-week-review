@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const Schools = (props) => {
-  console.log(props);
   return (
     <div>
       <h3>List of Schools</h3>
