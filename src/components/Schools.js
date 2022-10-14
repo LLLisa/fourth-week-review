@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AddSchool, EditSchool } from './forms';
-import { Link } from 'react-router-dom';
 import { deleteSchool } from '../store';
 
 class Schools extends React.Component {
@@ -19,7 +18,7 @@ class Schools extends React.Component {
   }
 
   handleDelete(school) {
-    this.props.deleteSchool(school);
+    console.log('//todo: handle delete button click');
   }
 
   render() {

@@ -9,21 +9,18 @@ class EditSchool extends React.Component {
       name: '',
       address: '',
     };
-    this.handleTyping = this.handleTyping.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    const { name, address } = this.props.school;
-    this.setState({ name: name });
-    this.setState({ address: address });
+    // we should pull name and address for props and assign them to the local state
   }
 
+  //what the heck is componentDidUpdate()???
   componentDidUpdate(prevProps) {
     if (prevProps.school.id !== this.props.school.id) {
-      const { name, address } = this.props.school;
-      this.setState({ name: name });
-      this.setState({ address: address });
+      // this should do the same thing as componentDidMount()
+      // be careful not to make an infinite loop!
     }
   }
 
@@ -33,11 +30,7 @@ class EditSchool extends React.Component {
 
   handleSubmit(ev) {
     ev.preventDefault();
-    const updateInfo = {
-      id: this.props.school.id,
-      name: this.state.name,
-      address: this.state.address,
-    };
+    //we should make an object with the updated info and pass it to updateSchool
     this.props.updateSchool(updateInfo);
   }
 
@@ -49,6 +42,7 @@ class EditSchool extends React.Component {
         <form name='edit-school'>
           <section
             id='input-fields'
+            // you can use inline styles like this, but you shouldn't
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -57,13 +51,13 @@ class EditSchool extends React.Component {
           >
             <input
               name='name'
-              value={name}
+              // value={what should this value be?}
               placeholder='Update School Name'
               onChange={this.handleTyping}
             ></input>
             <input
               name='address'
-              value={address}
+              // value={why do we even need a value attribute?}
               placeholder='Update School Address'
               onChange={this.handleTyping}
             ></input>
@@ -75,10 +69,4 @@ class EditSchool extends React.Component {
   }
 }
 
-const mapDispatch = (dispatch) => {
-  return {
-    updateSchool: (school) => dispatch(updateSchool(school)),
-  };
-};
-
-export default connect(null, mapDispatch)(EditSchool);
+export default connect()(EditSchool);

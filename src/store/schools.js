@@ -19,49 +19,25 @@ const getSchools = () => {
 };
 
 const addSchool = (school) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.post('/api/schools/', school);
-      dispatch({ type: ADD_SCHOOL, payload: response.data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-const updateSchool = (school) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.put(`/api/schools/${school.id}`, school);
-      dispatch({ type: UPDATE_SCHOOL, payload: response.data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-};
-
-const deleteSchool = (school) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.delete(`/api/schools/${school.id}`);
-      dispatch({ type: DELETE_SCHOOL, payload: response.data });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //this will return a function that makes an axios call and then
+  //send the response to the reducer
 };
 
 //reducer---------------------------
 const schoolReducer = (state = [], action) => {
   if (action.type === GET_SCHOOLS) return action.payload;
   if (action.type === ADD_SCHOOL) return [...state, action.payload];
-  if (action.type === UPDATE_SCHOOL)
-    return state.map((school) =>
-      school.id === action.payload.id ? action.payload : school
-    );
-  if (action.type === DELETE_SCHOOL)
-    return state.filter((school) => school.id !== action.payload.id);
+  if (action.type === UPDATE_SCHOOL) {
+    /*return a new state with the updated school in place of the old one*/
+  }
+  if (action.type === DELETE_SCHOOL) {
+    /*return a new state without the deleted school*/
+  }
   return state;
 };
 
-export { schoolReducer, getSchools, addSchool, updateSchool, deleteSchool };
+export {
+  schoolReducer,
+  getSchools,
+  addSchool /* anything else yo be exported goes here */,
+};

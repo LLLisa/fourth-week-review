@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Outlet, useParams } from 'react-router-dom';
-import axios from 'axios';
-import Schools from './Schools';
+import { Link, Outlet } from 'react-router-dom';
 import { getUsers, getSchools } from '../store';
 import { Homeboi } from '.';
 
@@ -13,38 +11,21 @@ class Menu extends React.Component {
       //set the default state to the data type it will be
       //THIS WILL SAVE YOUR LIFE as your projects get bigger
       selectedList: '',
-      // userList: [],
-      // schoolList: [],
     };
     this.selectList = this.selectList.bind(this);
     this.resetListDisplay = this.resetListDisplay.bind(this);
-    // this.getUsers = this.getUsers.bind(this);
-    // this.getSchools = this.getSchools.bind(this);
   }
 
-  //this runs the first time a component renders
-  //set pieces of state to their initial values
+  //this runs AFTER the first render and before the second
   componentDidMount() {
     this.resetListDisplay();
-    //getUsers is now on props instead of 'this'
     this.props.getUsers();
     this.props.getSchools();
   }
 
-  //these fumctions are now in the store!
-  // async getUsers() {
-  //   const users = await axios.get('/users');
-  //   this.setState({ userList: users.data });
-  // }
-
-  // async getSchools() {
-  //   const schools = await axios.get('/api/schools');
-  //   this.setState({ schoolList: schools.data });
-  // }
-
-  //this is an event handler that handles the 'onClick' event below
   selectList() {
     this.setState({
+      //this is probably the worst way to achieve this goal, but it works
       selectedList: window.location.toString().split('/').at(-1),
     });
   }

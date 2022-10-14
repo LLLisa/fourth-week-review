@@ -10,29 +10,27 @@ class AddSchool extends React.Component {
       address: '',
     };
     this.handleTyping = this.handleTyping.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   //async/await here?
   async handleTyping(ev) {
     await this.setState({ [ev.target.name]: ev.target.value });
-    // console.log(this.state.name);
   }
 
   handleSubmit(ev) {
-    ev.preventDefault();
-    const { name, address } = this.state;
-    this.props.addSchool({ name, address });
+    console.log('//todo: handle this submit');
   }
 
   render() {
     const { name, address } = this.state;
     return (
       <>
+        {/* semantic html is cool and fun */}
         <label htmlFor='add-school'>Create a New School:</label>
         <form name='add-school'>
           <section
             id='input-fields'
+            // you can use inline styles like this, but you shouldn't
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -41,18 +39,26 @@ class AddSchool extends React.Component {
           >
             <input
               name='name'
-              value={name}
+              // value={what should this value be?}
               placeholder='Name of School'
               onChange={this.handleTyping}
             ></input>
             <input
               name='address'
-              value={address}
+              // value={why do we even need a value attribute?}
               placeholder='Address of School'
               onChange={this.handleTyping}
             ></input>
           </section>
-          <button onClick={this.handleSubmit}>Submit</button>
+          <button
+            onClick={() =>
+              console.log(
+                'the submit buttone has been clicked, but nothing happened'
+              )
+            }
+          >
+            Submit
+          </button>
         </form>
       </>
     );
@@ -60,9 +66,7 @@ class AddSchool extends React.Component {
 }
 
 const mapDispatch = (dispatch) => {
-  return {
-    addSchool: (school) => dispatch(addSchool(school)),
-  };
+  return {};
 };
 
 export default connect(null, mapDispatch)(AddSchool);

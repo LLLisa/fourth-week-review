@@ -17,6 +17,6 @@ const store = createStore(
 
 export default store;
 //this will take all exports from './users' and export this from this file,
-//which is the index for the store directory
+//meaning that all those thunks can be imported from './store'
 export * from './users';
 export * from './schools';
