@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { AddSchool, EditSchool } from './forms';
 import { Link } from 'react-router-dom';
+import { deleteSchool } from '../store';
 
 class Schools extends React.Component {
   constructor() {
@@ -10,10 +11,15 @@ class Schools extends React.Component {
       selectedSchoolId: 0,
     };
     this.handleSelection = this.handleSelection.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleSelection(ev) {
     this.setState({ selectedSchoolId: ev.target.value });
+  }
+
+  handleDelete(school) {
+    this.props.deleteSchool(school);
   }
 
   render() {
@@ -24,7 +30,7 @@ class Schools extends React.Component {
     return (
       <>
         <h3>List of Schools</h3>
-        <select onChange={this.handleSelection}>
+        <select onMouseUp={this.handleSelection}>
           {schools.map((school) => {
             return (
               <option key={school.id} value={school.id}>
@@ -34,16 +40,26 @@ class Schools extends React.Component {
           })}
         </select>
         <h4>
-          Selected School:{' '}
-          {selectedSchool ? (
-            <Link to={`edit/${selectedSchool.id}`}>{selectedSchool.name}</Link>
-          ) : (
-            ''
+          {/* below, the '?.' is called conditional chaining, look it up! */}
+          Selected School: {selectedSchool?.name || 'No School Selected'}{' '}
+          {selectedSchool && (
+            <button onClick={() => this.handleDelete(selectedSchool)}>
+              delete
+            </button>
           )}
         </h4>
-        <AddSchool />
+        <section id='forms'>
+          <AddSchool />
+          {selectedSchool ? <EditSchool school={selectedSchool} /> : ''}
+        </section>
       </>
     );
   }
 }
-export default connect((state) => state)(Schools);
+
+const mapDispatch = (dispatch) => {
+  return {
+    deleteSchool: (school) => dispatch(deleteSchool(school)),
+  };
+};
+export default connect((state) => state, mapDispatch)(Schools);

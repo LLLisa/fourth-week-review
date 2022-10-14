@@ -36,7 +36,7 @@ class AddSchool extends React.Component {
             style={{
               display: 'flex',
               flexDirection: 'column',
-              maxWidth: '25%',
+              maxWidth: '40%',
             }}
           >
             <input
