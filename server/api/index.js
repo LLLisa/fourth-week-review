@@ -10,6 +10,7 @@ app.use(morgan('dev'));
 //api routing middleware----------------------------
 app.use('/api/users', require('./users'));
 app.use('/api/schools', require('./schools'));
+app.use('/api/companies', require('./companies'));
 
 //serve react JS from /dist folder-----------------------------
 

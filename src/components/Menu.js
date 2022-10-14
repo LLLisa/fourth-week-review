@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
-import { getUsers, getSchools } from '../store';
-import { Homeboi } from '.';
+import { getUsers, getSchools, getCompanies } from '../store';
+import { Homeboi, Companies } from '.';
 
 class Menu extends React.Component {
   constructor() {
@@ -19,8 +19,9 @@ class Menu extends React.Component {
   //this runs AFTER the first render and before the second
   componentDidMount() {
     this.resetListDisplay();
-    this.props.getUsers();
+    this.props.fetchUsers();
     this.props.getSchools();
+    this.props.getCompanies();
   }
 
   selectList() {
@@ -51,6 +52,7 @@ class Menu extends React.Component {
         <section>
           <Outlet />
         </section>
+        <Companies />
       </>
     );
   }
@@ -62,8 +64,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getUsers: () => dispatch(getUsers()),
+    fetchUsers: () => dispatch(getUsers()),
     getSchools: () => dispatch(getSchools()),
+    getCompanies: () => dispatch(getCompanies()),
   };
 };
 

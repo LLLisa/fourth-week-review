@@ -1,7 +1,8 @@
 const conn = require('../conn');
 const User = require('./User');
 const School = require('./School');
-const { users, schools } = require('../seedData');
+const Company = require('./Company');
+const { users, schools, companies } = require('../seedData');
 
 const dbSeed = async () => {
   try {
@@ -18,7 +19,10 @@ const dbSeed = async () => {
     const [homer, marge, bart, lisa, maggie, nelson, milhouse, gil, grimey] =
       await User.bulkCreate(users);
     const [springfieldElem, springfieldCC] = await School.bulkCreate(schools);
+    const [nuclear, moes, kwikemart] = await Company.bulkCreate(companies);
 
+    homer.companyId = nuclear.id;
+    moe.companyId = moes.id;
     bart.schoolId = springfieldElem.id;
     lisa.schoolId = springfieldElem.id;
     nelson.schoolId = springfieldElem.id;
@@ -35,6 +39,7 @@ const dbSeed = async () => {
 
     //Promise.all()?
     await Promise.all([
+      homer.save(),
       bart.save(),
       lisa.save(),
       nelson.save(),
@@ -49,4 +54,4 @@ const dbSeed = async () => {
   }
 };
 
-module.exports = { User, School, dbSeed };
+module.exports = { User, School, Company, dbSeed };
