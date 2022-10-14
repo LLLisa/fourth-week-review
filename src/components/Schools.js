@@ -14,7 +14,7 @@ class Schools extends React.Component {
   }
 
   handleSelection(ev) {
-    this.setState({ selectedSchoolId: ev.target.value });
+    console.log('//todo: handle the select element');
   }
 
   handleDelete(school) {
@@ -23,9 +23,7 @@ class Schools extends React.Component {
 
   render() {
     const { schools } = this.props;
-    const selectedSchool = schools.find(
-      (school) => school.id === this.state.selectedSchoolId * 1
-    );
+    const selectedSchool = '//should be the school matching selectedSchoolId';
     return (
       <>
         <h3>List of Schools</h3>
@@ -40,7 +38,7 @@ class Schools extends React.Component {
         </select>
         <h4>
           {/* below, the '?.' is called conditional chaining, look it up! */}
-          Selected School: {selectedSchool?.name || 'No School Selected'}{' '}
+          Selected School: {selectedSchool?.name || 'No School Selected'}
           {selectedSchool && (
             <button onClick={() => this.handleDelete(selectedSchool)}>
               delete
@@ -49,6 +47,7 @@ class Schools extends React.Component {
         </h4>
         <section id='forms'>
           <AddSchool />
+          {/* the EditSchool component should only display when a school is selected */}
           {selectedSchool ? <EditSchool school={selectedSchool} /> : ''}
         </section>
       </>
