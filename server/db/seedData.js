@@ -22,4 +22,10 @@ const schools = [
   { name: 'Shelbyville Tech', address: '1434 Washington Ave' },
 ];
 
-module.exports = { users, schools };
+const companies = [
+  { name: 'Springfield Nuclear Power Plant' },
+  { name: "Moe's Tavern" },
+  { name: 'Kwik-E-Mart' },
+];
+
+module.exports = { users, schools, companies };
