@@ -1,7 +1,7 @@
-import React, { createFactory } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Logo = () => {
+const Homeboi = () => {
   return (
     <Link to='/' style={{ textDecoration: 'none', fontSize: '2rem' }}>
       ᕕ(⌐■_■)ᕗ ♪♬
@@ -9,4 +9,4 @@ const Logo = () => {
   );
 };
 
-export default Logo;
+export default Homeboi;

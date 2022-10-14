@@ -3,7 +3,7 @@ const users = [
   {
     name: 'Marge',
     age: 41,
-    email: 'bluehairwhitedragon@hotmail.com',
+    email: 'bluehairdontcar@hotmail.com',
     isSimpson: true,
   },
   { name: 'Bart', age: 12, email: 'elbarto@gmail.com', isSimpson: true },
@@ -17,9 +17,9 @@ const users = [
 
 const schools = [
   { name: 'Springfield Elementary' },
-  { name: 'Springfield Community College' },
-  { name: 'Springfield A & U' },
-  { name: 'Shelbyville Tech' },
+  { name: 'Springfield Community College', address: '123 Fake St' },
+  { name: 'Springfield A & U', address: '613 SuperSix Way' },
+  { name: 'Shelbyville Tech', address: '1434 Washington Ave' },
 ];
 
 module.exports = { users, schools };

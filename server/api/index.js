@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, '../../public')));
 app.use('/dist', express.static(path.join(__dirname, '../../dist')));
 
 //catch all stray routes--------------------------------------
-app.use('*', function (req, res) {
+app.use('/', function (req, res) {
   res.sendFile(path.join(__dirname, '../../public/index.html'), function (err) {
     if (err) {
       res.status(500).send(err);

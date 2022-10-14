@@ -56,6 +56,7 @@ class Menu extends React.Component {
   render() {
     return (
       <>
+        <div>click the homeboi to go home &#8595;</div>
         <figure onClick={this.resetListDisplay}>
           <Homeboi />
         </figure>

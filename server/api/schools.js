@@ -31,4 +31,14 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+router.post('/', async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const response = await School.create(req.body);
+    res.send(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
